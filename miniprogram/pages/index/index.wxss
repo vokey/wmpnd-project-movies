@@ -50,6 +50,7 @@
   height: 120rpx;
   justify-content: space-evenly;
   background-color: #fff;
+  border-top: 1rpx solid #E6EBEF;
 }
 
 .btn {
