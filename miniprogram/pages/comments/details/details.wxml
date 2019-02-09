@@ -1,2 +1,26 @@
 <!--pages/comments/details/details.wxml-->
-<text>pages/comments/details/details.wxml</text>
+<view class='container'>
+  <view class='movie-info-card'>
+    <view class='movie-cover-wrapper'>
+      <image class='movie-cover' src='{{cover}}' mode='aspectFill'></image>
+    </view>
+
+    <view class='movie-title'>{{title}}</view>
+
+    <view class='movie-comment'>
+      <view class='comment-text'>{{comment}}</view>
+    </view>
+
+    <view class='btn-group'>
+      <view class='btn btn-fav' bindtap='onTapFav'>
+        <image class='btn-icon icon-fav' src='/images/fav.png' mode='aspectFit'></image>
+        <view class='btn-text'>收藏影评</view>
+      </view>
+      <view class='btn btn-comment' bindtap='onTapComment'>
+        <image class='btn-icon icon-write' src='/images/write.png' mode='aspectFit'></image>
+        <view class='btn-text'>写影评</view>
+      </view>
+    </view>
+  </view>
+</view>
+
