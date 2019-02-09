@@ -1,4 +1,9 @@
 /**app.wxss**/
+
+page {
+  background-color: #F7F9FB;
+}
+
 .container {
   display: flex;
   flex-direction: column;
