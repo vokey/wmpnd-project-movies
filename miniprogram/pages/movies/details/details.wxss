@@ -1,1 +1,91 @@
 /* pages/movies/details/details.wxss */
+
+.movie-info-card {
+  position: relative;
+  width: 650rpx;
+  height: 1060rpx;
+  margin-top: 90rpx;
+  border: 1rpx solid #E2E7EE;
+  border-radius: 10rpx;
+  background-color: #fff;
+  box-shadow: 0 2rpx 13rpx 5rpx rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.movie-cover {
+  position: absolute;
+  top: -60rpx;
+  left: 175rpx;
+  width: 300rpx;
+  height: 400rpx;
+  box-shadow: 0 2rpx 13rpx 5rpx rgba(0, 0, 0, 0.06);
+}
+
+.movie-title {
+  position: absolute;
+  top: 360rpx;
+  font-size: 35rpx;
+  line-height: 50rpx;
+  font-weight: bold;
+  opacity: 0.8;
+}
+
+.movie-description {
+  position: absolute;
+  top: 420rpx;
+  font-size: 28rpx;
+  line-height: 56rpx;
+  opacity: 0.8;
+  width: 480rpx;
+  max-height: 400rpx;
+}
+
+
+/* This method is not perfect, keep here to improve. */
+/* .movie-description::after {
+  content: '...';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+} */
+
+.description-text {
+  max-height: 448rpx;
+  overflow: hidden;
+}
+
+.description-more {
+  line-height: 40rpx;
+}
+
+.btn-group {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  width: 650rpx;
+  height: 120rpx;
+  justify-content: space-evenly;
+}
+
+.btn {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  color: #d4237a;
+  font-size: 30rpx;
+  line-height: 42rpx;
+  opacity: 0.65;
+  border: 2rpx solid #d4237a;
+  border-radius: 10rpx;
+  padding: 30rpx;
+  height: 80rpx;
+}
+
+.btn-icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 10rpx;
+}

@@ -1,2 +1,27 @@
 <!--pages/movies/details/details.wxml-->
-<text>pages/movies/details/details.wxml</text>
+<view class='container'>
+  <view class='movie-info-card'>
+    <view class='movie-cover-wrapper'>
+      <image class='movie-cover' src='{{cover}}' mode='aspectFill'></image>
+    </view>
+
+    <view class='movie-title'>{{title}}</view>
+
+    <view class='movie-description'>
+      <view class='description-text'>{{description}}</view>
+      <!-- A dumb way to show the overflow ... -->
+      <view class='description-more' wx:if='{{ description.length >= 120 }}'>...</view>
+    </view>
+
+    <view class='btn-group'>
+      <view class='btn btn-view'>
+        <image class='btn-icon icon-view' src='/images/view.png' mode='aspectFit'></image>
+        <view class='btn-text'>查看影评</view>
+      </view>
+      <view class='btn btn-comment'>
+        <image class='btn-icon icon-comment' src='/images/comment.png' mode='aspectFit'></image>
+        <view class='btn-text'>添加影评</view>
+      </view>
+    </view>
+  </view>
+</view>
