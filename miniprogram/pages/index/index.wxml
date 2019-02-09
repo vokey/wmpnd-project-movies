@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<view class='movie-info container'>
+<view class='movie-info container' bindtap='onTapMovie'>
   <view class='movie-cover-wrapper'>
     <image class='movie-cover' src='{{cover}}' mode='aspectFill'></image>
   </view>
@@ -7,7 +7,7 @@
 </view>
 
 <view class='container'>
-  <view class='recommend-wrapper'>
+  <view class='recommend-wrapper' bindtap='onTapRecommend'>
     <view class='avatar-wrapper'>
       <image class='avatar' src='{{avatar}}'></image>
     </view>
@@ -17,11 +17,11 @@
 
 
 <view class='btn-group'>
-  <view class='btn btn-hot'>
+  <view class='btn btn-hot' bindtap='onTapHot'>
     <image class='btn-icon icon-hot' src='/images/hot.png' mode='aspectFit'></image>
     <view class='btn-text'>热门</view>
   </view>
-  <view class='btn btn-mine'>
+  <view class='btn btn-mine' bindtap='onTapMine'>
     <image class='btn-icon icon-mine' src='/images/mine.png' mode='aspectFit'></image>
     <view class='btn-text'>我的</view>
   </view>

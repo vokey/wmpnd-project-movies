@@ -6,7 +6,10 @@ Page({
    * Page initial data
    */
   data: {
-
+    cover: "https://covers-1254341575.cos.ap-shanghai.myqcloud.com/p2496940327.jpg",
+    title: "海边的曼彻斯特",
+    avatar: "https://avatars-1254341575.cos.ap-shanghai.myqcloud.com/user.png",
+    username: "XXX",
   },
 
   /**
@@ -63,5 +66,29 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  onTapMovie() {
+    wx.navigateTo({
+      url: '/pages/movies/details/details',
+    })
+  },
+
+  onTapRecommend() {
+    wx.navigateTo({
+      url: '/pages/comments/details/details',
+    })
+  },
+
+  onTapHot() {
+    wx.navigateTo({
+      url: '/pages/movies/list/list',
+    })
+  },
+
+  onTapMine() {
+    wx.navigateTo({
+      url: '/pages/user/user',
+    })
   }
 })
