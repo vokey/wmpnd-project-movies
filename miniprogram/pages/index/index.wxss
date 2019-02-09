@@ -1,1 +1,68 @@
 /**index.wxss**/
+
+.movie-info {
+  margin-top: 40rpx;
+}
+
+.movie-cover {
+  width: 500rpx;
+  height: 750rpx;
+  box-shadow: 0 2rpx 13rpx 5rpx rgba(0, 0, 0, 0.06);
+}
+
+.movie-title {
+  margin-top: 10rpx;
+  font-size: 35rpx;
+  line-height: 50rpx;
+  color: #220010;
+  opacity: 0.8;
+}
+
+.recommend-wrapper {
+  display: flex;
+  align-items: center;
+  margin-top: 30rpx;
+}
+
+.avatar-wrapper {
+  margin-right: 20rpx;
+}
+
+.recommend-text {
+  font-size: 30rpx;
+  line-height: 42rpx;
+  color: #220010;
+  opacity: 0.8;
+}
+
+.avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+}
+
+.btn-group {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  width: 750rpx;
+  height: 120rpx;
+  justify-content: space-evenly;
+  background-color: #fff;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  color: #d4237a;
+  font-size: 30rpx;
+  line-height: 42rpx;
+  opacity: 0.75;
+}
+
+.btn-icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 10rpx;
+}
