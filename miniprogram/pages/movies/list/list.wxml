@@ -1,2 +1,14 @@
 <!--pages/movies/list/list.wxml-->
-<text>pages/movies/list/list.wxml</text>
+<view class='movies-list container'>
+  <block wx:for='{{movies}}' wx:key='{{item.imdb}}'>
+    <view class='item-wrapper' data-imdb='{{item.imdb}}' bindtap='onTapItem'>
+      <view class='cover-wrapper'>
+        <image class='cover' src='{{item.cover}}' mode='aspectFill'></image>
+      </view>
+      <view class='movie-info'>
+        <view class='title'>{{item.title}}</view>
+        <view class='category'>{{item.category}}</view>
+      </view>
+    </view>
+  </block>
+</view>

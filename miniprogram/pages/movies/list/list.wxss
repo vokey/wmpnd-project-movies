@@ -1,1 +1,40 @@
 /* pages/movies/list/list.wxss */
+
+.item-wrapper {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  width: 650rpx;
+  height: 300rpx;
+  background-color: #fff;
+  margin-top: 40rpx;
+  border: 2rpx solid #ececec;
+  box-shadow: 0 2rpx 13rpx 5rpx rgba(0, 0, 0, 0.02);
+}
+
+.cover-wrapper {
+  width: 200rpx;
+  height: 300rpx;
+}
+
+.cover {
+  width: 200rpx;
+  height: 300rpx;
+}
+
+.movie-info {
+  margin-left: 30rpx;
+}
+
+.title {
+  font-size: 35rpx;
+  line-height: 50rpx;
+  font-weight: bold;
+  opacity: 0.9;
+}
+
+.category {
+  font-size: 28rpx;
+  line-height: 40rpx;
+  opacity: 0.8;
+}
