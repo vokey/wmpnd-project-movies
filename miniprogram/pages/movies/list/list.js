@@ -83,5 +83,14 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  onTapItem(event) {
+    if (event.currentTarget.dataset.imdb) {
+      let imdb = event.currentTarget.dataset.imdb
+      wx.navigateTo({
+        url: '/pages/movies/details/details?imdb=' + imdb,
+      })
+    }
   }
 })
