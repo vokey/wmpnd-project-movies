@@ -8,6 +8,9 @@ var config = {
 
     // Movies Covers
     covers: `${bucket}/images/covers/`,
+
+    // User Avatars
+    avatars: `${bucket}/uploads/avatars/`,
   }
 };
 
