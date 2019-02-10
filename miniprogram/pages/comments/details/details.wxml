@@ -7,14 +7,22 @@
 
     <view class='movie-title'>{{title}}</view>
 
+    <view class='userinfo-wrapper'>
+      <view class='avatar-wrapper'>
+        <image class='avatar' src='{{avatar}}'></image>
+      </view>
+      <view class='comment-title'>{{username}}的影评</view>
+    </view>
+
     <view class='movie-comment'>
+      <image class='comment-icon icon-quote' src='/images/quote.png' mode='scaleToFit'></image>
       <view class='comment-text'>{{comment}}</view>
     </view>
 
     <view class='btn-group'>
       <view class='btn btn-fav' bindtap='onTapFav'>
-        <image class='btn-icon icon-fav' src='/images/fav.png' mode='aspectFit'></image>
-        <view class='btn-text'>收藏影评</view>
+        <image class='btn-icon icon-fav' src='{{ favorite ? "/images/fav_fill.png" : "/images/fav.png" }}' mode='aspectFit'></image>
+        <view class='btn-text'>{{ favorite ? "已收藏" : "收藏影评" }}</view>
       </view>
       <view class='btn btn-comment' bindtap='onTapComment'>
         <image class='btn-icon icon-write' src='/images/write.png' mode='aspectFit'></image>
