@@ -1,18 +1,39 @@
 // pages/movies/list/list.js
+const config = require('../../../config');
 Page({
 
   /**
    * Page initial data
    */
   data: {
-
+    movies: [],
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-
+    const db = wx.cloud.database()
+    db.collection('movies')
+      // Get movies list in descending order
+      .orderBy('release', 'desc')
+      .get()
+      .then(res => {
+        const result = res.data
+        const movies = []
+        result.forEach(item => {
+          let movie = {
+            imdb: item.imdb,
+            title: item.title,
+            cover: config.url.covers + item.image,
+            category: item.category.join(' / '),
+          }
+          movies.push(movie)
+        })
+        this.setData({
+          movies: movies,
+        })
+      })
   },
 
   /**
