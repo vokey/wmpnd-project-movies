@@ -16,7 +16,7 @@
 
     <view class='movie-comment'>
       <image class='comment-icon icon-quote' src='/images/quote.png' mode='scaleToFit'></image>
-      <view class='comment-text'>{{comment}}</view>
+      <view class='comment-text'>{{content}}</view>
     </view>
 
     <view class='btn-group'>

@@ -10,7 +10,7 @@ Page({
     title: "",
     cid: "",
     type: "",
-    comment: "",
+    content: "",
     username: "",
     avatar: "",
     favorite: "",
@@ -21,44 +21,34 @@ Page({
    */
   onLoad: function (options) {
     // Get passed GET parameters
-    if (options.imdb && options.cid) {
+    if (options.cid) {
       this.setData({
-        imdb: options.imdb,
         cid: options.cid,
       })
     }
 
+    wx.cloud.callFunction({
+      name: 'getComment',
+      data: {
+        filter: 'cid',
+        value: this.data.cid
+      }
+    }).then(res => {
+      let {type, content, username, avatar, imdb, title, cover} = res.result
+      this.setData({
+        type,
+        content,
+        username,
+        avatar,
+        imdb,
+        title,
+        cover,
+      })
+    })
+
     const db = wx.cloud.database()
-    const comments = db.collection('comments')
-    const movies = db.collection('movies')
-    const users = db.collection('users')
     const favorites = db.collection('favorites')
-    let comment = comments.doc(this.data.cid).get()
-    let movie = movies.where({imdb: this.data.imdb}).field({title:true, image:true}).get()
-    let user = users.where({_openid: this.data.uid}).get()
     let fav = favorites.where({cid: this.data.cid}).get()
-    movie.then(res => {
-      let result = res.data[0]
-      this.setData({
-        title: result.title,
-        cover: config.url.covers + result.image,
-      })
-    })
-    comment.then(res => {
-      let result = res.data
-      this.setData({
-        type: result.type,
-        comment: result.content,
-        uid: result._openid,
-      })
-    })
-    user.then(res => {
-      let result = res.data[0]
-      this.setData({
-        username: result.username,
-        avatar: config.url.avatars + result.avatar,
-      })
-    })
     fav.then(res => {
       if (res.data[0]) {
         this.setData({
