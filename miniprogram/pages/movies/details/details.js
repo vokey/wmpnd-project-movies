@@ -6,10 +6,10 @@ Page({
    * Page initial data
    */
   data: {
-    cover: "",
-    title: "",
-    description: "",
     imdb: "",
+    title: "",
+    cover: "",
+    description: "",
   },
 
   /**
@@ -20,21 +20,18 @@ Page({
       this.setData({
         imdb: options.imdb,
       })
-    }
-    const db = wx.cloud.database()
-    db.collection('movies').where({
-      imdb: this.data.imdb,
-    }).get()
-      .then(res => {
-        let result = res.data[0]
-        if (result.imdb === this.data.imdb) {
-          this.setData({
-            title: result.title,
-            cover: config.url.covers + result.image,
-            description: result.description,
-          })
+
+      wx.cloud.callFunction({
+        name: 'getMovie',
+        data: {
+          filter: 'imdb',
+          value: this.data.imdb
         }
+      }).then(res => {
+        let {title, cover, description} = res.result
+        this.setData({ title, cover, description })
       })
+    }
   },
 
   /**
