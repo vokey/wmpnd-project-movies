@@ -26,7 +26,20 @@ exports.main = async (event, context) => new Promise((resolve, reject) => {
       item.username = result.username
       item.avatar = result.avatar
 
-      resolve(item)
+      cloud.callFunction({
+        name: 'getMovie',
+        data: {
+          filter: 'imdb',
+          value: item.imdb,
+        }
+      }).then(res => {
+        let movie = res.result
+
+        item.title = movie.title
+        item.cover = movie.cover
+
+        resolve(item)
+      })
     })
   }
 
