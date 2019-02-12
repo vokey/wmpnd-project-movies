@@ -32,8 +32,9 @@ exports.main = async (event, context) => new Promise((resolve, reject) => {
       }
     }).then(res => {
       let movie = res.result
-      
+
       item.movie = {}
+      item.movie.imdb = movie.imdb
       item.movie.title = movie.title
       item.movie.cover = movie.cover
 
