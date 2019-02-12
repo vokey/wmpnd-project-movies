@@ -8,9 +8,9 @@ Page({
    * Page initial data
    */
   data: {
-    movies: {},
-    avatar: "https://avatars-1254341575.cos.ap-shanghai.myqcloud.com/user.png",
-    username: "XXX",
+    movie: {},
+    avatar: "",
+    username: "",
   },
 
   /**
@@ -31,20 +31,22 @@ Page({
       })
     }
 
+    // Get recommend
+    wx.cloud.callFunction({
+      name: 'getRecommend',
+    }).then(res => {
+      let result = res.result
+      let { movie, avatar, username, cid} = result
+      this.setData({ movie, avatar, username, cid })
+    })
+
   },
 
   /**
    * Lifecycle function--Called when page is initially rendered
    */
   onReady: function () {
-    // Get recommend
-    wx.cloud.callFunction({
-      name: 'getRecommend',
-    }).then(res => {
-      let result = res.result
-      let { movie, avatar, username } = result
-      this.setData({ movie, avatar, username })
-    })
+
   },
 
   /**
@@ -132,13 +134,13 @@ Page({
 
   onTapMovie() {
     wx.navigateTo({
-      url: '/pages/movies/details/details',
+      url: '/pages/movies/details/details?imdb=' + this.data.movie.imdb,
     })
   },
 
   onTapRecommend() {
     wx.navigateTo({
-      url: '/pages/comments/details/details',
+      url: '/pages/comments/details/details?cid=' + this.data.cid,
     })
   },
 

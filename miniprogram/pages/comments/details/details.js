@@ -1,5 +1,7 @@
 // pages/comments/details/details.js
 const config = require('../../../config');
+const app = getApp();
+const innerAudioContext = wx.createInnerAudioContext();
 Page({
 
   /**
@@ -14,6 +16,7 @@ Page({
     username: "",
     avatar: "",
     favorite: "",
+    mycid: "",
   },
 
   /**
@@ -34,10 +37,11 @@ Page({
         value: this.data.cid
       }
     }).then(res => {
-      let {type, content, username, avatar, imdb, title, cover} = res.result
+      let {type, content, uid, username, avatar, imdb, title, cover} = res.result
       this.setData({
         type,
         content,
+        uid,
         username,
         avatar,
         imdb,
@@ -47,12 +51,25 @@ Page({
     })
 
     const db = wx.cloud.database()
+
+    // Check favorite status
     const favorites = db.collection('favorites')
     let fav = favorites.where({cid: this.data.cid}).get()
     fav.then(res => {
       if (res.data[0]) {
         this.setData({
           favorite: res.data[0]._id,
+        })
+      }
+    })
+
+    // Check has the user published comment of same movie
+    const comments = db.collection('comments')
+    let comment = comments.where({_openid: app.globalData.userinfo.openid, imdb: this.data.imdb}).get()
+    comment.then(res => {
+      if (res.data[0]) {
+        this.setData({
+          mycid: res.data[0]._id,
         })
       }
     })
@@ -107,21 +124,55 @@ Page({
 
   },
 
-  onTapComment() {
-    wx.showActionSheet({
-      itemList: ["文字", "音频"],
-      success: res => {
-        console.log(res.tapIndex)
-      },
-      fail: err => {
-        console.log(err)
-      }
+  onTapPlay() {
+    console.log("Start Playing")
+    innerAudioContext.src = this.data.content
+    this.setData({ length: innerAudioContext.duration })
+    innerAudioContext.play()
+    innerAudioContext.onPlay(() => {
+      console.log("Playing")
     })
+  },
+
+  onTapComment() {
+    if (this.data.mycid) {
+      wx.navigateTo({
+        url: `/pages/comments/preview/preview?status=published&cid=${this.data.mycid}&type=${this.data.type}`,
+      })
+    } else {
+      wx.showActionSheet({
+        itemList: ["文字", "音频"],
+        success: res => {
+          console.log(res.tapIndex)
+          switch (res.tapIndex) {
+            case 0:
+              wx.navigateTo({
+                url: `/pages/comments/edit/edit?type=text&mode=add&imdb=${this.data.imdb}`,
+              });
+              break;
+            case 1:
+              wx.navigateTo({
+                url: `/pages/comments/edit/edit?type=audio&mode=add&imdb=${this.data.imdb}`,
+              });
+              break;
+          }
+        },
+        fail: err => {
+          console.log(err)
+        }
+      })
+    }
+    
   },
 
   onTapFav() {
     const favorites = wx.cloud.database().collection('favorites')
-    if (this.data.favorite) {
+    if (this.data.uid === app.globalData.userinfo.openid) {
+      wx.showToast({
+        icon: 'none',
+        title: '不能收藏自己的影评哦',
+      })
+    } else if (this.data.favorite) {
       favorites.doc(this.data.favorite).remove()
         .then(res => {
           this.setData({favorite: ""})

@@ -1,2 +1,40 @@
 <!--pages/comments/edit/edit.wxml-->
-<text>pages/comments/edit/edit.wxml</text>
+<view class='container'>
+  <view class='movie-comment-card'>
+    <view class='movie-cover-wrapper'>
+      <image class='movie-cover' src='{{cover}}' mode='aspectFill'></image>
+    </view>
+
+    <view class='movie-title'>{{title}}</view>
+
+    <view class="comment-form">
+      <form class='text-input' bindsubmit="bindCommentSubmit" wx:if='{{type === "text"}}'>
+        <textarea class='comment-input' placeholder="输入你的影评内容，150字以内…" maxlength='150' name="textarea" bindinput='onTextInput' value='{{draft}}'/>
+      </form>
+
+      <view class='audio-input' wx:if='{{type === "audio"}}'>
+        <view class='btn-record' hover-class='btn-record-hover' bind:longpress='onStartRecord' bind:touchend='onStopRecord'> 
+          <image class='icon-record' src='/images/record.png' mode='scaleToFit'></image>
+        </view>
+        <view class='btn-record-tips' wx:if='{{!content}}'>长按开始，松开结束</view>
+        <view class='btn-record-again' wx:if='{{content}}' bindtap='onPlay'>
+          <view>预览</view>
+        </view>
+      </view>
+
+    </view>
+
+    <view class='btn-group'>
+      <view class='btn btn-toAudio' wx:if='{{type === "text"}}' bindtap='onTapToAudio'>
+        <image class='btn-icon icon-mic' src='/images/mic.png' mode='aspectFit'></image>
+        <view class='btn-text'>改为录音</view>
+      </view>
+      <view class='btn btn-toText' wx:if='{{type === "audio"}}' bindtap='onTapToText'>
+        <image class='btn-icon icon-keyboard' src='/images/keyboard.png' mode='aspectFit'></image>
+        <view class='btn-text'>改为文字</view>
+      </view>
+    </view>
+  </view>
+
+  <view class='btn-submit {{ content ? "" : "btn-disabled" }}' bindtap='onTapSubmit'>完成</view>
+</view>

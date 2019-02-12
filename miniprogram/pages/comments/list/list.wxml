@@ -1,2 +1,25 @@
 <!--pages/comments/list/list.wxml-->
-<text>pages/comments/list/list.wxml</text>
+<view class='comments-list'>
+  <view wx:if='{{empty}}' class='no-comments'>
+    <image class='no-comments-icon icon-tears' src='/images/tears.png' mode='scaleToFit'></image>
+    <view class='no-comments-text'>影评区空空如也</view>
+  </view>
+  
+  <view class='comments-item' wx:for='{{comments}}' wx:key='{{item.cid}}' data-cid='{{item.cid}}' bindtap='onTapComment'>
+    <view class='userinfo'>
+      <image class='avatar' src='{{item.avatar}}' mode='aspectFill'></image>
+      <view class='username'>{{item.username}}</view>
+    </view>
+    <view class='comment-wrapper'>
+      <view class='comment-text' wx:if='{{item.type === "text"}}'>{{item.content}}</view>
+      <view class='comment-audio' wx:if='{{item.type === "audio"}}'>
+        <view class='btn-audio' catchtap='onTapPlay' data-id='{{index}}'>
+          <image class='btn-audio-icon icon-play' src='/images/play.png' mode='scaleToFit'></image>
+          <view class='btn-audio-text'></view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='btn-home' bindtap='onTapHome'>回到首页</view>

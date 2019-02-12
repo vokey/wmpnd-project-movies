@@ -1,5 +1,6 @@
 // pages/movies/list/list.js
 const config = require('../../../config');
+const app = getApp();
 Page({
 
   /**
@@ -13,27 +14,7 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-    const db = wx.cloud.database()
-    db.collection('movies')
-      // Get movies list in descending order
-      .orderBy('release', 'desc')
-      .get()
-      .then(res => {
-        const result = res.data
-        const movies = []
-        result.forEach(item => {
-          let movie = {
-            imdb: item.imdb,
-            title: item.title,
-            cover: config.url.covers + item.image,
-            category: item.category.join(' / '),
-          }
-          movies.push(movie)
-        })
-        this.setData({
-          movies: movies,
-        })
-      })
+    this.fetchMoviesList()
   },
 
   /**
@@ -83,6 +64,30 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  fetchMoviesList() {
+    if (app.globalData.movies) {
+      console.log("[Found movies list in globalData.]")
+      this.setData({
+        movies: app.globalData.movies,
+      })
+    } else {
+      console.log("[Fetching movies list...]")
+      wx.cloud.callFunction({
+        name: 'getMovie',
+        data: {
+          filter: 'release',
+          value: 'desc',
+        }
+      }).then(res => {
+        console.log("[Fetched.]")
+        this.setData({
+          movies: res.result,
+        })
+        app.globalData.movies = res.result
+      })
+    }
   },
 
   onTapItem(event) {

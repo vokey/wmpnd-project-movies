@@ -16,7 +16,13 @@
 
     <view class='movie-comment'>
       <image class='comment-icon icon-quote' src='/images/quote.png' mode='scaleToFit'></image>
-      <view class='comment-text'>{{content}}</view>
+      <view class='comment-text' wx:if='{{type === "text"}}'>{{content}}</view>
+      <view class='comment-audio' wx:if='{{type === "audio"}}'>
+        <view class='btn-audio' bindtap='onTapPlay'>
+          <image class='btn-audio-icon icon-play' src='/images/play.png' mode='scaleToFit'></image>
+          <view class='btn-audio-text'></view>
+        </view>
+      </view>
     </view>
 
     <view class='btn-group'>
