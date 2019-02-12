@@ -48,6 +48,18 @@ Page({
         title,
         cover,
       })
+
+      // Check has the user published comment of same movie
+      const comments = wx.cloud.database().collection('comments')
+      let comment = comments.where({ _openid: app.globalData.userinfo.openid, imdb: this.data.imdb }).get()
+      comment.then(res => {
+        console.log(res)
+        if (res.data[0]) {
+          this.setData({
+            mycid: res.data[0]._id,
+          })
+        }
+      })
     })
 
     const db = wx.cloud.database()
@@ -63,16 +75,6 @@ Page({
       }
     })
 
-    // Check has the user published comment of same movie
-    const comments = db.collection('comments')
-    let comment = comments.where({_openid: app.globalData.userinfo.openid, imdb: this.data.imdb}).get()
-    comment.then(res => {
-      if (res.data[0]) {
-        this.setData({
-          mycid: res.data[0]._id,
-        })
-      }
-    })
   },
 
   /**
