@@ -1,28 +1,34 @@
 <!--index.wxml-->
-<view class='movie-info container' bindtap='onTapMovie'>
-  <view class='movie-cover-wrapper'>
-    <image class='movie-cover' src='{{cover}}' mode='aspectFill'></image>
-  </view>
-  <view class='movie-title'>{{title}}</view>
+<view wx:if='{{needLogin}}'>
+  <button open-type='getUserInfo' type='primary' bindgetuserinfo='onGetUserInfo'>微信登录</button>
 </view>
 
-<view class='container'>
-  <view class='recommend-wrapper' bindtap='onTapRecommend'>
-    <view class='avatar-wrapper'>
-      <image class='avatar' src='{{avatar}}'></image>
+<view wx:if='{{!needLogin}}'>
+  <view class='movie-info container' bindtap='onTapMovie'>
+    <view class='movie-cover-wrapper'>
+      <image class='movie-cover' src='{{movie.cover}}' mode='aspectFill'></image>
     </view>
-    <view class='recommend-text'>{{username}} 向你推荐了一部电影</view>
+    <view class='movie-title'>{{movie.title}}</view>
   </view>
-</view>
+
+  <view class='container'>
+    <view class='recommend-wrapper' bindtap='onTapRecommend'>
+      <view class='avatar-wrapper'>
+        <image class='avatar' src='{{avatar}}'></image>
+      </view>
+      <view class='recommend-text'>{{username}} 向你推荐了一部电影</view>
+    </view>
+  </view>
 
 
-<view class='btn-group'>
-  <view class='btn btn-hot' bindtap='onTapHot'>
-    <image class='btn-icon icon-hot' src='/images/hot.png' mode='aspectFit'></image>
-    <view class='btn-text'>热门</view>
-  </view>
-  <view class='btn btn-mine' bindtap='onTapMine'>
-    <image class='btn-icon icon-mine' src='/images/mine.png' mode='aspectFit'></image>
-    <view class='btn-text'>我的</view>
+  <view class='btn-group'>
+    <view class='btn btn-hot' bindtap='onTapHot'>
+      <image class='btn-icon icon-hot' src='/images/hot.png' mode='aspectFit'></image>
+      <view class='btn-text'>热门</view>
+    </view>
+    <view class='btn btn-mine' bindtap='onTapMine'>
+      <image class='btn-icon icon-mine' src='/images/mine.png' mode='aspectFit'></image>
+      <view class='btn-text'>我的</view>
+    </view>
   </view>
 </view>
