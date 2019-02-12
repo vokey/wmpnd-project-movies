@@ -23,6 +23,7 @@ exports.main = async (event, context) => new Promise((resolve, reject) => {
       item.imdb = result.imdb
       item.type = result.type
       item.content = result.content
+      item.uid = result._openid
       item.username = result.username
       item.avatar = result.avatar
 
@@ -46,15 +47,16 @@ exports.main = async (event, context) => new Promise((resolve, reject) => {
   if (filter === "imdb" && value) {
     console.log("[Filter]: imdb, [Value]: ", value)
     let list = []
-    comments.where({imdb: value}).get().then(res => {
+    comments.where({imdb: value}).orderBy('updateTime', 'desc').get().then(res => {
       let result = res.data
 
       result.forEach(item => {
         let comment = {
-          cid: item.cid,
+          cid: item._id,
           imdb: item.imdb,
           type: item.type,
           content: item.content,
+          uid: item._openid,
           username: item.username,
           avatar: item.avatar,
         }
