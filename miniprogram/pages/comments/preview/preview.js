@@ -151,6 +151,8 @@ Page({
       let comment = comments.add({
         data: {
           imdb: this.data.imdb,
+          title: this.data.title,
+          cover: this.data.cover,
           type: this.data.type,
           content: this.data.content,
           username: this.data.username,
@@ -173,6 +175,8 @@ Page({
       wx.removeStorageSync(`draft_${this.data.imdb}`)
       let comment = comments.doc(this.data.cid).update({
         data: {
+          title: this.data.title,
+          cover: this.data.cover,
           type: this.data.type,
           content: this.data.content,
           username: this.data.username,
