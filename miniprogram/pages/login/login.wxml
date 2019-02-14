@@ -7,7 +7,7 @@
     </view>
     <view class='username'>{{nickName}}</view>
   </view>
-  <view wx:if='{{!authorized}}' class='wx-login'>
-    <button open-type='getUserInfo' type='primary' bindgetuserinfo='onGetUserInfo'>微信登录</button>
+  <view wx:if='{{!authorized}}'>
+    <button open-type='getUserInfo' bindgetuserinfo='onGetUserInfo' class='wx-login-btn' hover-class='wx-login-btn-hover'>微信登录</button>
   </view>
 </view>

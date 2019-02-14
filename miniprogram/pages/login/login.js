@@ -68,6 +68,7 @@ Page({
   },
 
   onGetUserInfo(event) {
+    // If user authorized and got the userinfo
     if (event.detail.userInfo) {
       // Hide login button
       this.setData({ authorized: true })
@@ -109,6 +110,7 @@ Page({
         })
       })
     } else {
+      // If user refused to authorize
       wx.showModal({
         title: '登录失败',
         content: '我们需要您的授权来访问用户资料',
@@ -118,7 +120,7 @@ Page({
             wx.openSetting({
               success: res => {
                 if (res.authSetting['scope.userInfo']) {
-                  console.log("success")
+                  // If user changed to authorize
                   // Hide login button
                   this.setData({ authorized: true })
                   wx.getUserInfo({

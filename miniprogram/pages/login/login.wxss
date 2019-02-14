@@ -25,7 +25,14 @@
   opacity: 0.8;
 }
 
-.wx-login {
+.wx-login-btn {
   margin-top: 30rpx;
-  width: 240rpx;
+  width: 320rpx;
+  background-color: #99acc0;
+  color: #fff;
+}
+
+.wx-login-btn-hover {
+  background-color: rgba(153, 172, 192, 0.75);
+  color: #fff;
 }
