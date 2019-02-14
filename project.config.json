@@ -28,12 +28,63 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 4,
 			"list": [
 				{
+					"id": 0,
+					"name": "movie detail",
+					"pathName": "pages/movies/details/details",
+					"query": "imdb=tt7605074",
+					"scene": null
+				},
+				{
+					"id": 1,
+					"name": "comments details",
+					"pathName": "pages/comments/details/details",
+					"query": "imdb=tt7605074&cid=XGBaQeSiwXKAQpbL",
+					"scene": null
+				},
+				{
+					"id": 2,
+					"name": "comments preview",
+					"pathName": "pages/comments/preview/preview",
+					"query": "imdb= tt4154756&type=audio&status=published&cid=XGM-jd7E7L4wAU7S",
+					"scene": null
+				},
+				{
 					"id": -1,
-					"name": "db guide",
-					"pathName": "pages/databaseGuide/databaseGuide"
+					"name": "movie list",
+					"pathName": "pages/movies/list/list",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 4,
+					"name": "comments list",
+					"pathName": "pages/comments/list/list",
+					"query": "imdb=tt7605074",
+					"scene": null
+				},
+				{
+					"id": 5,
+					"name": "comments edit",
+					"pathName": "pages/comments/edit/edit",
+					"query": "imdb=tt7605074&type=audio&mode=add",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "login",
+					"pathName": "pages/login/login",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "user",
+					"pathName": "pages/user/user",
+					"query": "",
+					"scene": null
 				}
 			]
 		}
