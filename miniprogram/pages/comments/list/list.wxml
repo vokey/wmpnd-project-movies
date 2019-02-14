@@ -5,7 +5,7 @@
     <view class='no-comments-text'>影评区空空如也</view>
   </view>
   
-  <view class='comments-item' wx:for='{{comments}}' wx:key='{{item.cid}}' data-cid='{{item.cid}}' bindtap='onTapComment'>
+  <view class='comments-item' wx:for='{{comments}}' wx:key='{{item.cid}}' data-id='{{index}}' bindtap='onTapComment'>
     <view class='userinfo'>
       <image class='avatar' src='{{item.avatar}}' mode='aspectFill'></image>
       <view class='username'>{{item.username}}</view>

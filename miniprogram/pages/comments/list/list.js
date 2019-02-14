@@ -1,6 +1,7 @@
 // pages/comments/list/list.js
 const app = getApp();
 const innerAudioContext = wx.createInnerAudioContext();
+const { login, hasComment } = require("../../../utils/utils.js");
 Page({
 
   /**
@@ -36,6 +37,28 @@ Page({
         this.setData({ comments: res.result })
       }
     })
+
+    // Check has the user published comment of same movie
+    if (!app.globalData.userinfo) {
+      login({
+        success: res => {
+          app.globalData.userinfo = res
+          hasComment({
+            imdb: this.data.imdb,
+            success: res => {
+              this.setData({ mycid: res })
+            }
+          })
+        }
+      })
+    } else {
+      hasComment({
+        imdb: this.data.imdb,
+        success: res => {
+          this.setData({ mycid: res })
+        }
+      })
+    }
   },
 
   /**
@@ -88,11 +111,19 @@ Page({
   },
 
   onTapComment(event) {
-    let cid = event.currentTarget.dataset.cid
-    wx.navigateTo({
-      url: '/pages/comments/details/details?cid=' + cid,
-    })
-
+    let id = event.currentTarget.dataset.id
+    let cid = this.data.comments[id].cid
+    
+    // If user tapped own comment, goto preview page
+    if (cid === this.data.mycid) {
+      wx.navigateTo({
+        url: '/pages/comments/preview/preview?status=published&cid=' + cid,
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/comments/details/details?cid=' + cid,
+      })
+    }
   },
 
   onTapPlay(event) {
