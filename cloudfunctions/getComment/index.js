@@ -21,26 +21,14 @@ exports.main = async (event, context) => new Promise((resolve, reject) => {
 
       item.cid = result._id
       item.imdb = result.imdb
+      item.title = result.title
+      item.cover = result.cover
       item.type = result.type
       item.content = result.content
       item.uid = result._openid
       item.username = result.username
       item.avatar = result.avatar
-
-      cloud.callFunction({
-        name: 'getMovie',
-        data: {
-          filter: 'imdb',
-          value: item.imdb,
-        }
-      }).then(res => {
-        let movie = res.result
-
-        item.title = movie.title
-        item.cover = movie.cover
-
-        resolve(item)
-      })
+      resolve(item)
     })
   }
 
@@ -65,6 +53,32 @@ exports.main = async (event, context) => new Promise((resolve, reject) => {
       
       resolve(list)
     })
+  }
+
+  if (filter === "openid") {
+    value ? openid = value : openid = wxContext.OPENID
+    let list = []
+    comments.where({ _openid: openid }).orderBy('updateTime', 'desc').get().then(res => {
+      let result = res.data
+
+      result.forEach(item => {
+        let comment = {
+          cid: item._id,
+          imdb: item.imdb,
+          title: item.title,
+          cover: item.cover,
+          type: item.type,
+          content: item.content,
+          uid: item._openid,
+          username: item.username,
+          avatar: item.avatar,
+        }
+        list.push(comment)
+      })
+
+      resolve(list)
+    })
+
   }
 
 
