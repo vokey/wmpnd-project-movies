@@ -1,5 +1,4 @@
 // pages/comments/preview/preview.js
-const config = require('../../../config');
 const app = getApp();
 const innerAudioContext = wx.createInnerAudioContext();
 Page({

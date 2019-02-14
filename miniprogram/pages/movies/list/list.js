@@ -1,5 +1,4 @@
 // pages/movies/list/list.js
-const config = require('../../../config');
 const app = getApp();
 Page({
 

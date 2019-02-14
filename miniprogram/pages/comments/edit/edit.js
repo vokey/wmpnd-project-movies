@@ -1,5 +1,4 @@
 // pages/comments/edit/edit.js
-const config = require('../../../config');
 const app = getApp();
 const recorderManager = wx.getRecorderManager();
 const innerAudioContext = wx.createInnerAudioContext();

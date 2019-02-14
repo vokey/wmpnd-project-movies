@@ -1,5 +1,4 @@
 // pages/comments/details/details.js
-const config = require('../../../config');
 const app = getApp();
 const innerAudioContext = wx.createInnerAudioContext();
 const { login, hasComment } = require("../../../utils/utils.js");

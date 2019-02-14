@@ -1,6 +1,5 @@
 // pages/movies/details/details.js
 const app = getApp();
-const config = require('../../../config');
 const { login, hasComment } = require("../../../utils/utils.js");
 Page({
 
