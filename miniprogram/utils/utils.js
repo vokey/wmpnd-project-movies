@@ -6,7 +6,7 @@ const login = ({success, fail}) => {
       console.log("Get userinfo from cache.")
       let userinfo = res.data
 
-      // Success callback
+      // Success callback, return userinfo
       success && success(userinfo)
     },
     fail: err => {
@@ -39,13 +39,14 @@ const login = ({success, fail}) => {
 
             wx.hideLoading()
 
-            // Success callback
+            // Success callback, return userinfo
             success && success(userinfo)
           })
         },
-        // If couldn't get userinfo, esp when not authorized
+        // If couldn't get userinfo, esp when not authorized, goto login page
         fail: err => {
-          fail && fail(err)
+          fail && fail("[Unauthorized]")
+
           wx.reLaunch({
             url: '/pages/login/login'
           })
