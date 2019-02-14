@@ -7,13 +7,15 @@
     "pages/comments/details/details",
     "pages/comments/edit/edit",
     "pages/comments/preview/preview",
-    "pages/user/user"
+    "pages/user/user",
+    "pages/login/login"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "侃侃电影",
     "navigationBarTextStyle": "black"
-  }
+  },
+  "cloud": true
 }
