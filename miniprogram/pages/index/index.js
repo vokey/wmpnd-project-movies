@@ -19,7 +19,7 @@ Page({
   onLoad: function (options) {
     // If cannot retrieve userinfo, call login
     if (!app.globalData.userinfo) {
-      let userinfo = login({
+      login({
         success: res => {
           console.log(res)
           app.globalData.userinfo = res
@@ -78,21 +78,21 @@ Page({
   onShareAppMessage: function () {
 
   },
-  
+
   showRecommend() {
     // Get recommend
     wx.cloud.callFunction({
       name: 'getRecommend',
     }).then(res => {
       let result = res.result
-      let { movie, avatar, username, cid } = result
-      this.setData({ movie, avatar, username, cid })
+      let { imdb, title, cover, avatar, username, cid } = result
+      this.setData({ imdb, title, cover, avatar, username, cid })
     })
   },
 
   onTapMovie() {
     wx.navigateTo({
-      url: '/pages/movies/details/details?imdb=' + this.data.movie.imdb,
+      url: '/pages/movies/details/details?imdb=' + this.data.imdb,
     })
   },
 

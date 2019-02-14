@@ -1,9 +1,9 @@
 <!--index.wxml-->
 <view class='movie-info container' bindtap='onTapMovie'>
   <view class='movie-cover-wrapper'>
-    <image class='movie-cover' src='{{movie.cover}}' mode='aspectFill'></image>
+    <image class='movie-cover' src='{{cover}}' mode='aspectFill'></image>
   </view>
-  <view class='movie-title'>{{movie.title}}</view>
+  <view class='movie-title'>{{title}}</view>
 </view>
 
 <view class='container'>
