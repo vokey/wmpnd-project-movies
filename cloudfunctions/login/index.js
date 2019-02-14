@@ -17,13 +17,11 @@ exports.main = async (event, context) => {
 
   // Get WXContext
   const wxContext = cloud.getWXContext()
-  console.log("[WXContext]", wxContext.OPENID)
+  console.log("[WXContext]", wxContext)
 
-  // Get user registration status
-  let res = await db.collection('users').where({ _openid: wxContext.OPENID}).get()
-  let userinfo = res.data[0]
   return {
     openid: wxContext.OPENID,
-    userinfo: userinfo,
+    username: event.nickName,
+    avatar: event.avatarUrl,
   }
 }
