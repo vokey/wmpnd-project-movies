@@ -81,5 +81,35 @@ exports.main = async (event, context) => new Promise((resolve, reject) => {
 
   }
 
+  if (filter === "cidList" && value) {
+    let list = []
+    let task = []
+    value.forEach(item => {
+      console.log(item)
+      let promise = comments.doc(item).get()
+      task.push(promise)
+    })
+    Promise.all(task).then(res => {
+      res.forEach(item => {
+        let comment = {}
+        let result = item.data
+
+        comment.cid = result._id
+        comment.imdb = result.imdb
+        comment.title = result.title
+        comment.cover = result.cover
+        comment.type = result.type
+        comment.content = result.content
+        comment.uid = result._openid
+        comment.username = result.username
+        comment.avatar = result.avatar
+        list.push(comment)
+      })
+      resolve(list)
+    }).catch(err => {
+      console.log(err)
+    })
+
+  }
 
 })
