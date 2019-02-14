@@ -1,1 +1,122 @@
 /* pages/user/user.wxss */
+
+.btn-filter {
+  margin-top: 60rpx;
+  display: flex;
+  align-items: center;
+}
+
+.btn-filter-text {
+  color: #f9aa84;
+}
+
+.btn-filter-icon {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.comments-list {
+  margin-bottom: 160rpx;
+}
+
+.item-wrapper {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  width: 650rpx;
+  height: 300rpx;
+  background-color: #fff;
+  margin-top: 40rpx;
+  border: 2rpx solid #ececec;
+  box-shadow: 0 2rpx 13rpx 5rpx rgba(0, 0, 0, 0.02);
+}
+
+.cover-wrapper {
+  width: 200rpx;
+  height: 300rpx;
+}
+
+.cover {
+  width: 200rpx;
+  height: 300rpx;
+}
+
+.card-right-side {
+  margin-left: 30rpx;
+}
+
+.title {
+  font-size: 35rpx;
+  line-height: 50rpx;
+  font-weight: bold;
+  opacity: 0.9;
+}
+
+.comment-wrapper {
+  margin-top: 20rpx;
+}
+
+.comment-text {
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 400rpx;
+  font-size: 30rpx;
+  line-height: 42rpx;
+  opacity: 0.8;
+}
+
+.userinfo {
+  display: flex;
+  align-items: center;
+  margin-top: 30rpx;
+}
+
+.avatar {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  border: 1rpx solid #f4f4f4;
+  box-shadow: 0 2rpx 13rpx 5rpx rgba(0, 0, 0, 0.02);
+}
+
+.username {
+  margin-left: 20rpx;
+  color: #33434e;
+  font-size: 30rpx;
+  line-height: 42rpx;
+}
+
+.btn-audio {
+  width: 320rpx;
+  height: 60rpx;
+  border: 1rpx solid #c3d0da;
+  border-radius: 10rpx;
+  background: #f4f4f4;
+  display: flex;
+  align-items: center;
+}
+
+.btn-audio-icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin-left: 20rpx;
+}
+
+.btn-audio-text {
+  margin-left: 20rpx;
+  color: #ef3d97;
+}
+
+.btn-home {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 750rpx;
+  height: 120rpx;
+  line-height: 120rpx;
+  text-align: center;
+  color: #99acc0;
+  background-color: #fff;
+  border-top: 1rpx solid #e6ebee;
+}

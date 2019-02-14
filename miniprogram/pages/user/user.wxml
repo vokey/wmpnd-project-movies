@@ -1,2 +1,40 @@
 <!--pages/user/user.wxml-->
-<text>pages/user/user.wxml</text>
+
+<view class='container'>
+  <view class='btn-filter' bindtap='onTapFilter'>
+    <view class='btn-filter-text'>{{filter.text}}</view>
+    <image class='btn-filter-icon icon-down_arrow' src='/images/down_arrow.png' mode='scaleToFit'></image>
+  </view>
+  
+  <view class='comments-list'>
+    <block wx:for='{{shown}}' wx:key='{{item.cid}}'>
+      <view class='item-wrapper' data-cid='{{item.cid}}' bindtap='onTapItem'>
+        <view class='cover-wrapper'>
+          <image class='cover' src='{{item.cover}}' mode='aspectFill'></image>
+        </view>
+
+        <view class='card-right-side'>
+          <view class='title'>{{item.title}}</view>
+          <view class='comment-wrapper'>
+            <view class='comment-text' wx:if='{{item.type === "text"}}'>{{item.content}}</view>
+            <view class='comment-audio' wx:if='{{item.type === "audio"}}'>
+              <view class='btn-audio' catchtap='onTapPlay' data-id='{{index}}'>
+                <image class='btn-audio-icon icon-play' src='/images/play.png' mode='scaleToFit'></image>
+                <view class='btn-audio-text'></view>
+              </view>
+            </view>
+          </view>
+          
+          <view class='userinfo'>
+            <image class='avatar' src='{{item.avatar}}' mode='aspectFill'></image>
+            <view class='username'>{{item.username}}</view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+<view class='btn-home' bindtap='onTapHome'>回到首页</view>
+</view>
+
+
