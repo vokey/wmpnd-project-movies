@@ -62,5 +62,32 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  getWritten() {
+    wx.cloud.callFunction({
+      name: 'getComment',
+      data: {
+        filter: 'openid',
+        value: '',
+      }
+    }).then(res => {
+      this.setData({ written: res.result })
+    })
+  },
+
+  getFavorite() {
+    wx.cloud.callFunction({
+      name: 'getFavorite',
+      data: {},
+    }).then(res => {
+      this.setData({ favorite: res.result })
+    })
+  },
+
+  onTapHome() {
+    wx.reLaunch({
+      url: '/pages/index/index',
+    })
   }
 })
