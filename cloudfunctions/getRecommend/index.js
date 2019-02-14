@@ -12,7 +12,7 @@ exports.main = async (event, context) => new Promise((resolve, reject) => {
   const wxContext = cloud.getWXContext()
 
   let item = {}
-  let list = comments.orderBy('createTime', 'desc').limit(5).get()
+  let list = comments.orderBy('createTime', 'desc').limit(10).get()
   list.then(res => {
     let result = res.data
 
@@ -21,25 +21,12 @@ exports.main = async (event, context) => new Promise((resolve, reject) => {
 
     item.cid = comment._id
     item.imdb = comment.imdb
+    item.title = comment.title
+    item.cover = comment.cover
     item.username = comment.username
     item.avatar = comment.avatar
-
-    cloud.callFunction({
-      name: 'getMovie',
-      data: {
-        filter: 'imdb',
-        value: item.imdb,
-      }
-    }).then(res => {
-      let movie = res.result
-
-      item.movie = {}
-      item.movie.imdb = movie.imdb
-      item.movie.title = movie.title
-      item.movie.cover = movie.cover
-
-      resolve(item)
-    })
+    
+    resolve(item)
   })
 
 })
