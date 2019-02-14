@@ -14,7 +14,9 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-    this.fetchMoviesList()
+    this.fetchMoviesList({
+      useCache: true,
+    })
   },
 
   /**
@@ -49,7 +51,12 @@ Page({
    * Page event handler function--Called when user drop down
    */
   onPullDownRefresh: function () {
-
+    this.fetchMoviesList({
+      useCache: false,
+      callback: () => {
+        wx.stopPullDownRefresh()
+      }
+    })
   },
 
   /**
@@ -66,8 +73,8 @@ Page({
 
   },
 
-  fetchMoviesList() {
-    if (app.globalData.movies) {
+  fetchMoviesList({useCache, callback}) {
+    if (useCache && app.globalData.movies) {
       console.log("[Found movies list in globalData.]")
       this.setData({
         movies: app.globalData.movies,
@@ -86,6 +93,8 @@ Page({
           movies: res.result,
         })
         app.globalData.movies = res.result
+
+        callback && callback()
       })
     }
   },

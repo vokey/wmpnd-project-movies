@@ -24,19 +24,7 @@ Page({
     }
 
     // Get comments list
-    wx.cloud.callFunction({
-      name: 'getComment',
-      data: {
-        filter: 'imdb',
-        value: this.data.imdb
-      }
-    }).then(res => {
-      if (res.result.length == 0) {
-        this.setData({ empty: true })
-      } else {
-        this.setData({ comments: res.result })
-      }
-    })
+    this.fetchCommentsList()
 
     // Check has the user published comment of same movie
     if (!app.globalData.userinfo) {
@@ -93,7 +81,9 @@ Page({
    * Page event handler function--Called when user drop down
    */
   onPullDownRefresh: function () {
-
+    this.fetchCommentsList(() => {
+      wx.stopPullDownRefresh()
+    })
   },
 
   /**
@@ -108,6 +98,24 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  fetchCommentsList(callback) {
+    wx.cloud.callFunction({
+      name: 'getComment',
+      data: {
+        filter: 'imdb',
+        value: this.data.imdb
+      }
+    }).then(res => {
+      if (res.result.length == 0) {
+        this.setData({ empty: true })
+      } else {
+        this.setData({ comments: res.result })
+      }
+
+      callback && callback()
+    })
   },
 
   onTapComment(event) {

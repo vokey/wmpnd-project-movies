@@ -1,5 +1,7 @@
 {
   "usingComponents": {},
   "navigationBarTitleText": "热门电影",
-  "navigationBarTextStyle": "black"
+  "navigationBarTextStyle": "black",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark"
 }

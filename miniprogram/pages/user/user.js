@@ -49,7 +49,14 @@ Page({
    * Page event handler function--Called when user drop down
    */
   onPullDownRefresh: function () {
-
+    switch (this.data.filter.type) {
+      case 'fav':
+        this.getFavorite(() => { wx.stopPullDownRefresh() });
+        break;
+      case 'written':
+        this.getWritten(() => { wx.stopPullDownRefresh() });
+        break;
+    }
   },
 
   /**

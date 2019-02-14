@@ -1,5 +1,7 @@
 {
   "usingComponents": {},
   "navigationBarTitleText": "影评列表",
-  "navigationBarTextStyle": "black"
+  "navigationBarTextStyle": "black",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark"
 }
