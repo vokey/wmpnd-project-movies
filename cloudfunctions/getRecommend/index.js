@@ -5,6 +5,7 @@ cloud.init()
 
 // Init cloud database
 const db = cloud.database()
+const _ = db.command
 const comments = cloud.database().collection('comments')
 
 // 云函数入口函数
@@ -12,7 +13,10 @@ exports.main = async (event, context) => new Promise((resolve, reject) => {
   const wxContext = cloud.getWXContext()
 
   let item = {}
-  let list = comments.orderBy('createTime', 'desc').limit(10).get()
+  let list = comments.where({
+    _openid: _.neq(wxContext.OPENID)
+  })
+    .orderBy('createTime', 'desc').limit(10).get()
   list.then(res => {
     let result = res.data
 
