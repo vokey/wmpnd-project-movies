@@ -1,0 +1,31 @@
+/* miniprogram/pages/login/login.wxss */
+.userinfo {
+  display: flex;
+  align-items: center;
+  margin-top: 120rpx;
+}
+
+.avatar-wrapper {
+  margin-right: 20rpx;
+}
+
+.avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  border: 1rpx solid #e2e6ea;
+  box-shadow: 0 2rpx 13rpx 5rpx rgba(0, 0, 0, 0.1);
+}
+
+.username {
+  font-size: 40rpx;
+  line-height: 56rpx;
+  color: #d4237a;
+  font-weight: bold;
+  opacity: 0.8;
+}
+
+.wx-login {
+  margin-top: 30rpx;
+  width: 240rpx;
+}
