@@ -2,6 +2,7 @@
 const config = require('../../../config');
 const app = getApp();
 const innerAudioContext = wx.createInnerAudioContext();
+const { login, hasComment } = require("../../../utils/utils.js");
 Page({
 
   /**
@@ -50,16 +51,26 @@ Page({
       })
 
       // Check has the user published comment of same movie
-      const comments = wx.cloud.database().collection('comments')
-      let comment = comments.where({ _openid: app.globalData.userinfo.openid, imdb: this.data.imdb }).get()
-      comment.then(res => {
-        console.log(res)
-        if (res.data[0]) {
-          this.setData({
-            mycid: res.data[0]._id,
-          })
-        }
-      })
+      if (!app.globalData.userinfo) {
+        login({
+          success: res => {
+            app.globalData.userinfo = res
+            hasComment({
+              imdb: this.data.imdb,
+              success: res => {
+                this.setData({ mycid: res })
+              }
+            })
+          }
+        })
+      } else {
+        hasComment({
+          imdb: this.data.imdb,
+          success: res => {
+            this.setData({ mycid: res })
+          }
+        })
+      }
     })
 
     const db = wx.cloud.database()

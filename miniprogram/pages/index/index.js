@@ -1,7 +1,7 @@
 //index.js
-const config = require('../../config');
 const app = getApp();
 const db = wx.cloud.database();
+const { login } = require("../../utils/utils.js");
 Page({
 
   /**
@@ -17,29 +17,18 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-    // If cannot retrieve userinfo, check userinfo authorization
+    // If cannot retrieve userinfo, call login
     if (!app.globalData.userinfo) {
-      wx.getSetting({
+      let userinfo = login({
         success: res => {
-          if (res.authSetting['scope.userInfo']) {
-            // If authorized, try to get userinfo
-            this.getUserInfo()
-          } else {
-            this.setData({needLogin: true})
-          }
+          console.log(res)
+          app.globalData.userinfo = res
+          this.showRecommend()
         }
       })
+    } else {
+      this.showRecommend()
     }
-
-    // Get recommend
-    wx.cloud.callFunction({
-      name: 'getRecommend',
-    }).then(res => {
-      let result = res.result
-      let { movie, avatar, username, cid} = result
-      this.setData({ movie, avatar, username, cid })
-    })
-
   },
 
   /**
@@ -89,46 +78,15 @@ Page({
   onShareAppMessage: function () {
 
   },
-
-  onGetUserInfo() {
-    this.getUserInfo()
-    this.setData({needLogin: false})
-  },
-
-  getUserInfo() {
-    console.log("[Getting userinfo from db...]")
+  
+  showRecommend() {
+    // Get recommend
     wx.cloud.callFunction({
-      name: "login",
-      data: {},
+      name: 'getRecommend',
     }).then(res => {
-      let userinfo = res.result.userinfo
-      // Set globalData after getting userinfo
-      if (userinfo && userinfo.username && userinfo.avatar) {
-        app.globalData.userinfo = {
-          openid: res.result.openid,
-          username: userinfo.username,
-          avatar: userinfo.avatar,
-        }
-      } else {
-        wx.getUserInfo({
-          success: res => {
-            console.log("[Get userinfo from WeChat] ")
-            let { nickName, avatarUrl } = res.userInfo
-            this.register({ nickName, avatarUrl })
-          }
-        })
-      }
-    })
-  },
-
-  register(userinfo) {
-    db.collection('users').add({
-      data: {
-        username: userinfo.nickName,
-        avatar: userinfo.avatarUrl,
-      }
-    }).then(res => {
-      this.getUserInfo()
+      let result = res.result
+      let { movie, avatar, username, cid } = result
+      this.setData({ movie, avatar, username, cid })
     })
   },
 

@@ -1,6 +1,7 @@
 // pages/movies/details/details.js
-const config = require('../../../config');
 const app = getApp();
+const config = require('../../../config');
+const { login, hasComment } = require("../../../utils/utils.js");
 Page({
 
   /**
@@ -34,17 +35,29 @@ Page({
       })
     }
 
-    // Check has the user published comment of this movie
-    const db = wx.cloud.database()
-    const comments = db.collection('comments')
-    let comment = comments.where({ _openid: app.globalData.userinfo.openid, imdb: this.data.imdb }).get()
-    comment.then(res => {
-      if (res.data[0]) {
-        this.setData({
-          mycid: res.data[0]._id,
-        })
-      }
-    })
+    // Check has the user published comment of same movie
+    if (!app.globalData.userinfo) {
+      login({
+        success: res => {
+          app.globalData.userinfo = res
+          hasComment({
+            imdb: this.data.imdb,
+            success: res => {
+              this.setData({ mycid: res })
+            }
+          })
+        }
+      })
+    } else {
+      hasComment({
+        imdb: this.data.imdb,
+        success: res => {
+          this.setData({ mycid: res })
+        }
+      })
+    }
+
+    
   },
 
   /**
@@ -94,6 +107,20 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  checkComment() {
+    // Check has the user published comment of this movie
+    const db = wx.cloud.database()
+    const comments = db.collection('comments')
+    let comment = comments.where({ _openid: app.globalData.userinfo.openid, imdb: this.data.imdb }).get()
+    comment.then(res => {
+      if (res.data[0]) {
+        this.setData({
+          mycid: res.data[0]._id,
+        })
+      }
+    })
   },
 
   onTapView() {
