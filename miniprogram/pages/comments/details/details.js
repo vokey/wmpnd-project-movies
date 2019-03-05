@@ -76,7 +76,7 @@ Page({
 
     // Check favorite status
     const favorites = db.collection('favorites')
-    let fav = favorites.where({cid: this.data.cid}).get()
+    let fav = favorites.where({ _openid: app.globalData.userinfo.openid, cid: this.data.cid}).get()
     fav.then(res => {
       if (res.data[0]) {
         this.setData({
